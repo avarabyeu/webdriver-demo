@@ -1,5 +1,8 @@
-package com.github.njakovleva;
+package Main;
 
+import ManageEmail.InboxPage;
+import ManageEmail.LoginPage;
+import ManageEmail.NewMailPage;
 import org.testng.*;
 import java.io.IOException;
 import java.util.List;
@@ -28,45 +31,37 @@ import com.google.common.collect.*;
 /**
  * Открыть в браузере почтовый ящик, создать новое письмо, отправить его.
  */
-public class PartOneClass {
-    String BaseUrl = "http://www.inbox.lv";
-    long TimeOut = 30;
-    public WebDriver driver = new PhantomJSDriver();
+public class PartOneClass
+{
+    public static WebDriver driver = new PhantomJSDriver();
+    public static String senderMailUrl = "www.gmail.com";
+    public static String receiverMailUrl = "www.yandex.com";
 
-    public void sendEmail(String emailSubject)
-    {
-        driver.manage().timeouts().implicitlyWait(TimeOut, TimeUnit.SECONDS);
+    public static String senderLogin;
+    public static String senderPassword;
+    public static String receiverLogin;
+    public static String receiverPassword;
+    public static String receiver;
+    public static String subject = "test";
+    public static String content;
 
-        driver.navigate().to(BaseUrl);
-
-        WebElement loginBox = driver.findElement(By.id("Email"));
-        loginBox.sendKeys("nata-y@inbox.lv");
-
-        WebElement pwBox = driver.findElement(By.id("Passwd"));
-        pwBox.sendKeys("$KoMo190256");
-
-        WebElement signInBtn = driver.findElement(By.id("signIn"));
-        signInBtn.click();
-
-        driver.manage().timeouts().implicitlyWait(TimeOut, TimeUnit.SECONDS);
-
-        driver.switchTo().frame("canvas_frame");
-
-        WebElement composeBtn = driver.findElement(By.cssSelector("div[class='T-I J-J5-Ji T-I-KE L3']"));
-        composeBtn.click();
-
-        WebElement toBox = driver.findElement(By.cssSelector("textarea[class='dK nr']"));
-        toBox.sendKeys("natayandexone@mail.com");
-
-        WebElement subjBox = driver.findElement(By.cssSelector("input[class='ez nr']"));
-        subjBox.sendKeys(emailSubject);
-
-        WebElement msgBox = driver.findElement(By.cssSelector("textarea[class='Ak aXjCH']"));
-        msgBox.sendKeys("This is a test email sent via Selenium Web Driver");
-
-        WebElement sendBtn = driver.findElement(By.cssSelector("div[class='T-I J-J5-Ji Bq nS T-I-KE L3']>b"));
-        sendBtn.click();
-
+    public PartOneClass() {
     }
 
+    public InboxPage sendEmail()
+    {
+        LoginPage loginPage = new LoginPage(driver, senderMailUrl);
+
+        //sender actions
+        InboxPage inboxPage = loginPage.loginAs(senderLogin, senderPassword);
+        NewMailPage newMailPage = inboxPage.openComposePage();
+        inboxPage = newMailPage.sendMail(receiver, subject, content);
+
+        loginPage = inboxPage.signOut();
+
+        //receiver actions
+        loginPage = new LoginPage(driver, receiverMailUrl);
+        inboxPage = loginPage.loginAs(receiverLogin, receiverPassword);
+        return inboxPage;
+    }
 }
