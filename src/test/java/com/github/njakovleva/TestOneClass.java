@@ -1,6 +1,9 @@
-package com.github.njakovleva;
+package Test;
 
 import Main.PartOneClass;
+import ManageEmail.InboxPage;
+import ManageEmail.LoginPage;
+import ManageEmail.NewMailPage;
 import org.omg.CORBA.TIMEOUT;
 import org.testng.*;
 import java.io.IOException;
@@ -33,25 +36,19 @@ import com.google.common.collect.*;
  - Проверить что письмо пришло, используя протокол POP3, либо IMAP
  */
 
+public class TestOneClass
+{
+    public static String subject = "test";
 
-
-
-public class TestOneClass {
-
-    public static PartOneClass partOneClass = new PartOneClass();
-    public static WebDriver webDriver = new PhantomJSDriver();
-    static String sentEmailSubject = "Test email";
-    static String receivedEmailSubject;
-    static String BaseUrl = "http://www.mail.com";
-    static long TimeOut = 30;
-
-    public static void main(String[] args) {
-        TestOneClass testOneClass = new TestOneClass();
+    public static void main(String[] args)
+    {
+        PartOneClass partOneClass = new PartOneClass();
 
         //selection which procedure to run
 
         //case 1
-        checkUI();
+
+        checkUI(partOneClass);
 
         //case 2
         //checkOutbox();
@@ -61,14 +58,9 @@ public class TestOneClass {
     }
 
     @Test(description = "Проверить что письмо пришло через UI (т.е. в браузере)")
-    public static void checkUI() {
-
-        //send email
-        sendEmail(sentEmailSubject);
-
-        //check if message appeared in Inbox
-        receivedEmailSubject = messageReceivedUI(sentEmailSubject);
-        Assert.assertEquals(receivedEmailSubject, sentEmailSubject);
+    public static void checkUI(PartOneClass partOneClass)
+    {
+        Assert.assertTrue(partOneClass.sendEmail().hasMessage(subject));
     }
 
     @Test(description = "Проверить что письмо появилось в папке отправленные.")
@@ -81,40 +73,21 @@ public class TestOneClass {
         //something
     }
 
-    public static void sendEmail(String sentEmailSubject) {
-        partOneClass.sendEmail(sentEmailSubject);
+
+
+    /*private static void login(String login, String password)
+    {
+        inboxPage = loginPage.loginAs(login, password);
     }
 
-    public static void loginToReceiverMail() {
-        webDriver.manage().timeouts().implicitlyWait(TimeOut, TimeUnit.SECONDS);
-
-        webDriver.manage().timeouts().implicitlyWait(TimeOut, TimeUnit.SECONDS);
-
-        webDriver.navigate().to(BaseUrl);
-
-        WebElement loginBox = webDriver.findElement(By.id("Email"));
-        loginBox.sendKeys("natayandexone@mail.com");
-
-        WebElement pwBox = webDriver.findElement(By.id("Passwd"));
-        pwBox.sendKeys("Kalina@35");
-
-        WebElement signInBtn = webDriver.findElement(By.id("signIn"));
-        signInBtn.click();
-
+    private static void openComposePage()
+    {
+        newMailPage = inboxPage.openComposePage();
     }
 
-    public static String messageReceivedUI(String messageSubject) {
-        loginToReceiverMail();
-        WebElement message;
-        try {
-           message = webDriver.findElement(By.linkText(messageSubject));
-        }
-        catch (NoSuchElementException e)
-        {
-            return "";
-        }
-
-        return messageSubject;
+    private static void sendMessage(String receiverMail, String mailSubject, String mailContent)
+    {
+        inboxPage = newMailPage.sendMail(receiverMail, mailSubject, mailContent);
     }
 
     public boolean messageReceivedOutbox() {
@@ -125,5 +98,5 @@ public class TestOneClass {
     public boolean messageReceivedPOP3() {
         //something here
         return true;
-    }
+    }*/
 }
