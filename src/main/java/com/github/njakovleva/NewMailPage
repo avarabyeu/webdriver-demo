@@ -1,0 +1,90 @@
+package ManageEmail;
+
+import org.testng.*;
+import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import com.sun.mail.pop3.POP3Store;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import com.google.common.collect.*;
+
+/**
+ * Created by jakovleva on 1/8/2015.
+ */
+public class NewMailPage {
+    private final WebDriver driver;
+
+    public NewMailPage(WebDriver driver) {
+        this.driver = driver;
+
+        // Check that we're on the right page.
+        if (!"Compose".equals(driver.getTitle())) {
+            // Alternatively, we could navigate to the login page, perhaps logging out first
+            throw new IllegalStateException("This is not the Compose page");
+        }
+    }
+
+    By recipientLocator = By.id("recipient");
+    By subjectLocator = By.id("subject");
+    By contentLocator = By.id("content");
+    By sendButtonLocator = By.id("send");
+
+    public NewMailPage typeRecipient(String recipient) {
+        // This is the only place that "knows" how to enter a recipient
+        driver.findElement(recipientLocator).sendKeys(recipient);
+
+        // Return the current page object as this action doesn't navigate to a page represented by another PageObject
+        return this;
+    }
+
+    public NewMailPage typeSubject(String subject) {
+        // This is the only place that "knows" how to enter a subject
+        driver.findElement(subjectLocator).sendKeys(subject);
+
+        // Return the current page object as this action doesn't navigate to a page represented by another PageObject
+        return this;
+    }
+
+    public NewMailPage typeContent(String content) {
+        // This is the only place that "knows" how to enter a content
+        driver.findElement(contentLocator).sendKeys(content);
+
+        // Return the current page object as this action doesn't navigate to a page represented by another PageObject
+        return this;
+    }
+
+    // The compose page allows the user to send the message
+    private InboxPage submitMail() {
+        // This is the only place that sends mail and expects the destination to be the inbox page.
+        // A separate method should be created for the instance of clicking login whilst expecting a login failure.
+        driver.findElement(sendButtonLocator).submit();
+
+        // Return a new page object representing the destination. Should the login page ever
+        // go somewhere else (for example, a legal disclaimer) then changing the method signature
+        // for this method will mean that all tests that rely on this behaviour won't compile.
+        return new InboxPage(driver);
+    }
+
+    // Conceptually, the compose page offers the user the service of being able to "send mail"
+    // the application using a recipient, subject and content.
+    public InboxPage sendMail(String recipient, String subject, String content) {
+        // The PageObject methods that enter recipient, subject, content & submit mail have already defined and should not be repeated here.
+        typeRecipient(recipient);
+        typeSubject(subject);
+        typeContent(content);
+        return submitMail();
+    }
+}
