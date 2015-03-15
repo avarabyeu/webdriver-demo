@@ -18,6 +18,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.google.common.collect.*;
+import ManageEmail.OutboxPage;
 
 /**
  * Created by jakovleva on 1/8/2015.
@@ -36,13 +37,19 @@ public class InboxPage {
     }
 
     By composeButtonLocator = By.id("compose");
-    By subjectLocator = By.id("subject");
     By signOutButtonLocator = By.id("signout");
+    By outboxLinkLocator = By.id("outbox");
 
     public NewMailPage openComposePage()
     {
         driver.findElement(composeButtonLocator).submit();
         return new NewMailPage(driver);
+    }
+
+    public OutboxPage openOutboxPage()
+    {
+        driver.findElement(outboxLinkLocator).submit();
+        return new OutboxPage(driver);
     }
 
     public LoginPage signOut()
