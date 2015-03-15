@@ -1,7 +1,9 @@
 package Test;
 
-import Main.PartOneClass;
+import Main.SendFromGUIClass;
+import Main.UserData;
 import ManageEmail.InboxPage;
+import ManageEmail.OutboxPage;
 import ManageEmail.LoginPage;
 import ManageEmail.NewMailPage;
 import org.omg.CORBA.TIMEOUT;
@@ -29,74 +31,50 @@ import com.google.common.collect.*;
  * Created by jakovleva on 11/6/2014.
  */
 
-/**
- *
+
+/* *
  - Проверить что письмо появилось в папке отправленные.
  - Проверить что письмо пришло через UI (т.е. в браузере)
  - Проверить что письмо пришло, используя протокол POP3, либо IMAP
  */
 
-public class TestOneClass
-{
-    public static String subject = "test";
+public class TestOneClass {
+    public static SendFromGUIClass sendFromGui = new SendFromGUIClass();
+    public static UserData userData = new UserData();
+    public static String subject = sendFromGui.subject;
 
-    public static void main(String[] args)
-    {
-        PartOneClass partOneClass = new PartOneClass();
+
+    public void main() {
+
 
         //selection which procedure to run
 
         //case 1
-
-        checkUI(partOneClass);
+        checkUI(sendFromGui);
 
         //case 2
-        //checkOutbox();
+        checkOutbox(sendFromGui);
 
         //case 3
         //checkPOP3();
     }
 
     @Test(description = "Проверить что письмо пришло через UI (т.е. в браузере)")
-    public static void checkUI(PartOneClass partOneClass)
-    {
-        Assert.assertTrue(partOneClass.sendEmail().hasMessage(subject));
+    public static void checkUI(SendFromGUIClass sendFromGUI) {
+        sendFromGUI.sendEmail();
+        InboxPage inboxPage = sendFromGUI.openReceiverEmail();
+        Assert.assertTrue(inboxPage.hasMessage(subject));
     }
+
 
     @Test(description = "Проверить что письмо появилось в папке отправленные.")
-    public void checkOutbox() {
+    public void checkOutbox(SendFromGUIClass sendFromGUI) {
+        sendFromGUI.sendEmail();
+        OutboxPage outboxPage = sendFromGUI.openSenderOutbox();
+        Assert.assertTrue(outboxPage.hasMessage(subject));
+    }
+
+    //@Test(description = "Проверить что письмо пришло, используя протокол POP3, либо IMAP")
+    //public void checkPOP3() {
         //something
-    }
-
-    @Test(description="Проверить что письмо пришло, используя протокол POP3, либо IMAP")
-    public void checkPOP3() {
-        //something
-    }
-
-
-
-    /*private static void login(String login, String password)
-    {
-        inboxPage = loginPage.loginAs(login, password);
-    }
-
-    private static void openComposePage()
-    {
-        newMailPage = inboxPage.openComposePage();
-    }
-
-    private static void sendMessage(String receiverMail, String mailSubject, String mailContent)
-    {
-        inboxPage = newMailPage.sendMail(receiverMail, mailSubject, mailContent);
-    }
-
-    public boolean messageReceivedOutbox() {
-        //something here
-        return true;
-    }
-
-    public boolean messageReceivedPOP3() {
-        //something here
-        return true;
-    }*/
-}
+    //}
