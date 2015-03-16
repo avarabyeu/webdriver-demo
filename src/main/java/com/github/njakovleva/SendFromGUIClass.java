@@ -1,7 +1,6 @@
 package com.github.njakovleva;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by jakovleva on 1/20/2015.

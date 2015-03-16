@@ -37,16 +37,16 @@ public class TestOneClass {
 
     @Test(description = "Проверить что письмо пришло через UI (т.е. в браузере)")
     public void checkUI() {
-        sendFromGui.sendEmail();
-        InboxPage inboxPage = sendFromGui.openReceiverEmail();
+        sendFromGui.sendEmail(webDriver);
+        InboxPage inboxPage = sendFromGui.openReceiverEmail(webDriver);
         Assert.assertTrue(inboxPage.hasMessage(userData.getSubject()));
     }
 
 
     @Test(description = "Проверить что письмо появилось в папке отправленные.")
     public void checkOutbox() {
-        sendFromGui.sendEmail();
-        OutboxPage outboxPage = sendFromGui.openSenderOutbox();
+        sendFromGui.sendEmail(webDriver);
+        OutboxPage outboxPage = sendFromGui.openSenderOutbox(webDriver);
         Assert.assertTrue(outboxPage.hasMessage(userData.getSubject()));
     }
 
