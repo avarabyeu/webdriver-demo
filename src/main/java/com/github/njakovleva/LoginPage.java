@@ -22,7 +22,7 @@ public class LoginPage {
         driver.navigate().to(url);
 
         // Check that we're on the right page.
-        if (!"Login".equals(driver.getTitle())) {
+        if (!"Gmail".equals(driver.getTitle())) {
             // Alternatively, we could navigate to the login page, perhaps logging out first
             throw new IllegalStateException("This is not the login page");
         }
@@ -34,14 +34,14 @@ public class LoginPage {
 
     // The login page contains several HTML elements that will be represented as WebElements.
     // The locators for these elements should only be defined once.
-    By usernameLocator = By.id("username");
-    By passwordLocator = By.id("passwd");
-    By loginButtonLocator = By.id("login");
+    By usernameLocator = By.id("Email");
+    By passwordLocator = By.id("Passwd");
+    By loginButtonLocator = By.id("signIn");
 
     // The login page allows the user to type their username into the username field
     public LoginPage typeUsername(String username) {
         // This is the only place that "knows" how to enter a username
-        driver.findElement(usernameLocator).sendKeys(username);
+        driver.findElement(usernameLocator).sendKeys(String.valueOf(username));
 
         // Return the current page object as this action doesn't navigate to a page represented by another PageObject
         return this;
@@ -50,7 +50,7 @@ public class LoginPage {
     // The login page allows the user to type their password into the password field
     public LoginPage typePassword(String password) {
         // This is the only place that "knows" how to enter a password
-        driver.findElement(passwordLocator).sendKeys(password);
+        driver.findElement(passwordLocator).sendKeys(String.valueOf(password));
 
         // Return the current page object as this action doesn't navigate to a page represented by another PageObject
         return this;

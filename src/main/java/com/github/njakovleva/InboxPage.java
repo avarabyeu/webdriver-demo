@@ -16,13 +16,13 @@ public class InboxPage {
         this.driver = driver;
 
         // Check that we're on the right page.
-        if (!"Inbox".equals(driver.getTitle())) {
+        if (!"Gmail".equals(driver.getTitle())) {
             // Alternatively, we could navigate to the login page, perhaps logging out first
             throw new IllegalStateException("This is not the inbox page");
         }
     }
 
-    By composeButtonLocator = By.id("compose");
+    By composeButtonLocator = By.id("COMPOSE");
     By signOutButtonLocator = By.id("signout");
     By outboxLinkLocator = By.id("outbox");
 
