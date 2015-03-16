@@ -29,9 +29,9 @@ public class TestOneClass {
 
 
     @Test(description = "Проверить что письмо появилось в папке отправленные.")
-    public void checkOutbox(SendFromGUIClass sendFromGUI) {
-        sendFromGUI.sendEmail();
-        OutboxPage outboxPage = sendFromGUI.openSenderOutbox();
+    public void checkOutbox() {
+        sendFromGui.sendEmail();
+        OutboxPage outboxPage = sendFromGui.openSenderOutbox();
         Assert.assertTrue(outboxPage.hasMessage(userData.getSubject()));
     }
 
