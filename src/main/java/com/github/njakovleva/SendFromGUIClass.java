@@ -1,40 +1,13 @@
-package Main;
+package com.github.njakovleva;
 
-import ManageEmail.InboxPage;
-        import ManageEmail.LoginPage;
-        import ManageEmail.NewMailPage;
-        import ManageEmail.OutboxPage;
-        import Main.UserData;
-        import org.testng.*;
-        import java.io.IOException;
-        import java.util.List;
-        import java.util.Properties;
-        import java.util.Set;
-        import java.util.concurrent.TimeUnit;
-        import javax.mail.Folder;
-        import javax.mail.Message;
-        import javax.mail.MessagingException;
-        import javax.mail.NoSuchProviderException;
-        import javax.mail.Session;
-        import com.sun.mail.pop3.POP3Store;
-        import org.openqa.selenium.By;
-        import org.openqa.selenium.WebDriver;
-        import org.openqa.selenium.WebElement;
-        import org.openqa.selenium.remote.DesiredCapabilities;
-        import org.openqa.selenium.phantomjs.PhantomJSDriver;
-        import org.testng.annotations.BeforeClass;
-        import org.testng.annotations.Test;
-        import com.google.common.collect.*;
-        import java.io.FileInputStream;
-        import java.io.IOException;
-        import java.io.InputStream;
-        import java.util.Properties;
+import Main.UserData;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 /**
  * Created by jakovleva on 1/20/2015.
  */
-public class SendFromGUIClass
-{
+public class SendFromGUIClass {
     public static String senderMailUrl;
     public static String receiverMailUrl;
     public static String senderLogin;
@@ -51,8 +24,7 @@ public class SendFromGUIClass
 
     public UserData userData = new UserData();
 
-    public void sendEmail()
-    {
+    public void sendEmail() {
         getUserData();
 
         WebDriver driver = new PhantomJSDriver();
@@ -64,8 +36,7 @@ public class SendFromGUIClass
         inboxPage = newMailPage.sendMail(receiver, subject, content);
     }
 
-    public InboxPage openReceiverEmail()
-    {
+    public InboxPage openReceiverEmail() {
         WebDriver driver = new PhantomJSDriver();
         LoginPage loginPage = new LoginPage(driver, receiverMailUrl);
 
@@ -74,8 +45,7 @@ public class SendFromGUIClass
         return inboxPage;
     }
 
-    public OutboxPage openSenderOutbox()
-    {
+    public OutboxPage openSenderOutbox() {
         getUserData();
 
         WebDriver driver = new PhantomJSDriver();

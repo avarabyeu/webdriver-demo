@@ -1,8 +1,4 @@
-package ManageEmail;
-
-/**
- * Created by jakovleva on 1/8/2015.
- */
+package com.github.njakovleva;
 
 import org.testng.*;
 import java.io.IOException;
@@ -22,23 +18,39 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.google.common.collect.*;
+import ManageEmail.OutboxPage;
 
-public class OutboxPage {
+/**
+ * Created by jakovleva on 1/8/2015.
+ */
+public class InboxPage {
     private final WebDriver driver;
 
-    public OutboxPage(WebDriver driver) {
+    public InboxPage(WebDriver driver) {
         this.driver = driver;
 
         // Check that we're on the right page.
-        if (!"Outbox".equals(driver.getTitle())) {
+        if (!"Inbox".equals(driver.getTitle())) {
             // Alternatively, we could navigate to the login page, perhaps logging out first
-            throw new IllegalStateException("This is not the outbox page");
+            throw new IllegalStateException("This is not the inbox page");
         }
     }
 
     By composeButtonLocator = By.id("compose");
-    By subjectLocator = By.id("subject");
     By signOutButtonLocator = By.id("signout");
+    By outboxLinkLocator = By.id("outbox");
+
+    public NewMailPage openComposePage()
+    {
+        driver.findElement(composeButtonLocator).submit();
+        return new NewMailPage(driver);
+    }
+
+    public OutboxPage openOutboxPage()
+    {
+        driver.findElement(outboxLinkLocator).submit();
+        return new OutboxPage(driver);
+    }
 
     public LoginPage signOut()
     {

@@ -1,4 +1,5 @@
-package ManageEmail;
+package com.github.njakovleva;
+
 import org.testng.*;
 import java.io.IOException;
 import java.util.List;
