@@ -18,14 +18,13 @@ import org.testng.annotations.Test;
 public class TestOneClass {
     private SendFromGUIClass sendFromGui = new SendFromGUIClass();
     private UserData userData = new UserData();
-    private String subject = sendFromGui.subject;
 
 
     @Test(description = "Проверить что письмо пришло через UI (т.е. в браузере)")
     public void checkUI() {
         sendFromGui.sendEmail();
         InboxPage inboxPage = sendFromGui.openReceiverEmail();
-        Assert.assertTrue(inboxPage.hasMessage(subject));
+        Assert.assertTrue(inboxPage.hasMessage(userData.getSubject()));
     }
 
 
@@ -33,7 +32,7 @@ public class TestOneClass {
     public void checkOutbox(SendFromGUIClass sendFromGUI) {
         sendFromGUI.sendEmail();
         OutboxPage outboxPage = sendFromGUI.openSenderOutbox();
-        Assert.assertTrue(outboxPage.hasMessage(subject));
+        Assert.assertTrue(outboxPage.hasMessage(userData.getSubject()));
     }
 
     //@Test(description = "Проверить что письмо пришло, используя протокол POP3, либо IMAP")

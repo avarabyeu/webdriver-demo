@@ -1,59 +1,46 @@
 package com.github.njakovleva;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by jakovleva on 1/20/2015.
  */
 public class SendFromGUIClass {
-    public static String senderMailUrl;
-    public static String receiverMailUrl;
-    public static String senderLogin;
-    public static String senderPassword;
-    public static String receiverLogin;
-    public static String receiverPassword;
-    public static String receiver;
-    public static String subject;
-    public static String content;
 
 
-    public SendFromGUIClass() {
-    }
-
-    public UserData userData = new UserData();
+    private static UserData userData = new UserData();
 
     public void sendEmail() {
-        getUserData();
 
-        WebDriver driver = new PhantomJSDriver();
-        LoginPage loginPage = new LoginPage(driver, senderMailUrl);
+
+        WebDriver driver = new FirefoxDriver();
+        LoginPage loginPage = new LoginPage(driver, userData.getSenderMailUrl());
 
         //sender actions
-        InboxPage inboxPage = loginPage.loginAs(senderLogin, senderPassword);
+        InboxPage inboxPage = loginPage.loginAs(userData.getSenderLogin(), userData.getSenderPassword());
         NewMailPage newMailPage = inboxPage.openComposePage();
-        inboxPage = newMailPage.sendMail(receiver, subject, content);
+        inboxPage = newMailPage.sendMail(userData.getReceiver(), userData.getSubject(), userData.getContent());
     }
 
     public InboxPage openReceiverEmail() {
-        WebDriver driver = new PhantomJSDriver();
-        LoginPage loginPage = new LoginPage(driver, receiverMailUrl);
+        WebDriver driver = new FirefoxDriver();
+        LoginPage loginPage = new LoginPage(driver, userData.getReceiverMailUrl());
 
         //receiver actions
-        InboxPage inboxPage = loginPage.loginAs(receiverLogin, receiverPassword);
+        InboxPage inboxPage = loginPage.loginAs(userData.getReceiverLogin(), userData.getReceiverPassword());
         return inboxPage;
     }
 
     public OutboxPage openSenderOutbox() {
-        getUserData();
 
-        WebDriver driver = new PhantomJSDriver();
-        LoginPage loginPage = new LoginPage(driver, senderMailUrl);
+        WebDriver driver = new FirefoxDriver();
+        LoginPage loginPage = new LoginPage(driver, userData.getSenderMailUrl());
 
         //sender actions
-        InboxPage inboxPage = loginPage.loginAs(senderLogin, senderPassword);
+        InboxPage inboxPage = loginPage.loginAs(userData.getSenderLogin(), userData.getSenderPassword());
         NewMailPage newMailPage = inboxPage.openComposePage();
-        inboxPage = newMailPage.sendMail(receiver, subject, content);
+        inboxPage = newMailPage.sendMail(userData.getReceiver(), userData.getSubject(), userData.getContent());
 
         //open outbox
         OutboxPage outboxPage = inboxPage.openOutboxPage();
@@ -61,9 +48,5 @@ public class SendFromGUIClass {
         return outboxPage;
     }
 
-    private void getUserData() {
-        userData.getUserData(senderMailUrl, receiverMailUrl, senderLogin, senderPassword,
-                receiverLogin, receiverPassword, receiver, subject, content);
-    }
 
 }
