@@ -11,10 +11,7 @@ public class SendFromGUIClass {
 
     private static UserData userData = new UserData();
 
-    public void sendEmail() {
-
-
-        WebDriver driver = new FirefoxDriver();
+    public void sendEmail(WebDriver driver) {
         LoginPage loginPage = new LoginPage(driver, userData.getSenderMailUrl());
 
         //sender actions
@@ -23,8 +20,7 @@ public class SendFromGUIClass {
         inboxPage = newMailPage.sendMail(userData.getReceiver(), userData.getSubject(), userData.getContent());
     }
 
-    public InboxPage openReceiverEmail() {
-        WebDriver driver = new FirefoxDriver();
+    public InboxPage openReceiverEmail(WebDriver driver) {
         LoginPage loginPage = new LoginPage(driver, userData.getReceiverMailUrl());
 
         //receiver actions
@@ -32,9 +28,8 @@ public class SendFromGUIClass {
         return inboxPage;
     }
 
-    public OutboxPage openSenderOutbox() {
+    public OutboxPage openSenderOutbox(WebDriver driver) {
 
-        WebDriver driver = new FirefoxDriver();
         LoginPage loginPage = new LoginPage(driver, userData.getSenderMailUrl());
 
         //sender actions

@@ -1,7 +1,11 @@
 package com.github.njakovleva;
 
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
@@ -19,6 +23,17 @@ public class TestOneClass {
     private SendFromGUIClass sendFromGui = new SendFromGUIClass();
     private UserData userData = new UserData();
 
+    private WebDriver webDriver;
+
+    @BeforeClass
+    public void openWebDriver(){
+        webDriver = new FirefoxDriver();
+    }
+
+    @AfterClass
+    public void closeWebDriver(){
+        webDriver.close();
+    }
 
     @Test(description = "Проверить что письмо пришло через UI (т.е. в браузере)")
     public void checkUI() {
