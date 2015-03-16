@@ -1,6 +1,5 @@
 package com.github.njakovleva;
 
-import Main.UserData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 

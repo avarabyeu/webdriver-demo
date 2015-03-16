@@ -1,24 +1,10 @@
 package com.github.njakovleva;
 
-import org.testng.*;
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import com.sun.mail.pop3.POP3Store;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import com.google.common.collect.*;
-import ManageEmail.OutboxPage;
+
+import java.util.NoSuchElementException;
 
 /**
  * Created by jakovleva on 1/8/2015.
@@ -40,32 +26,26 @@ public class InboxPage {
     By signOutButtonLocator = By.id("signout");
     By outboxLinkLocator = By.id("outbox");
 
-    public NewMailPage openComposePage()
-    {
+    public NewMailPage openComposePage() {
         driver.findElement(composeButtonLocator).submit();
         return new NewMailPage(driver);
     }
 
-    public OutboxPage openOutboxPage()
-    {
+    public OutboxPage openOutboxPage() {
         driver.findElement(outboxLinkLocator).submit();
         return new OutboxPage(driver);
     }
 
-    public LoginPage signOut()
-    {
+    public LoginPage signOut() {
         driver.findElement(signOutButtonLocator).submit();
         return new LoginPage(driver);
     }
 
-    public boolean hasMessage(String subject)
-    {
+    public boolean hasMessage(String subject) {
         WebElement message;
         try {
             message = driver.findElement(By.linkText(subject));
-        }
-        catch (NoSuchElementException e)
-        {
+        } catch (NoSuchElementException e) {
             return false;
         }
         return true;

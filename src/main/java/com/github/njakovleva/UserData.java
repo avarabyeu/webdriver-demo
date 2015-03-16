@@ -1,9 +1,10 @@
-package Main;
+package com.github.njakovleva;
 
 
 /**
  * Created by jakovleva on 1/27/2015.
  */
+
 import java.io.*;
 import java.util.Properties;
 
@@ -40,8 +41,7 @@ public class UserData {
     }
 
     public void getUserData(String SenderMailUrl, String ReceiverMailUrl, String SenderLogin, String SenderPassword,
-                            String ReceiverLogin, String ReceiverPassword, String Receiver, String Subject, String Content)
-    {
+                            String ReceiverLogin, String ReceiverPassword, String Receiver, String Subject, String Content) {
         Properties userData = new Properties();
         InputStream input = null;
 

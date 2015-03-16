@@ -1,25 +1,7 @@
 package com.github.njakovleva;
 
-import org.testng.*;
-import java.io.IOException;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import com.sun.mail.pop3.POP3Store;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import com.google.common.collect.*;
 
 /**
  * Created by jakovleva on 1/8/2015.

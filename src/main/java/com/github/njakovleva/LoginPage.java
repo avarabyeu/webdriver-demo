@@ -1,36 +1,18 @@
 package com.github.njakovleva;
 
-import org.testng.*;
-import java.io.IOException;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import com.sun.mail.pop3.POP3Store;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import com.google.common.collect.*;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by jakovleva on 1/8/2015.
  */
-public class LoginPage
-{
+public class LoginPage {
     private final WebDriver driver;
     private String url;
 
-    public LoginPage(WebDriver driver, String url)
-    {
+    public LoginPage(WebDriver driver, String url) {
         long TimeOut = 30;
         this.driver = driver;
         this.url = url;
@@ -46,8 +28,7 @@ public class LoginPage
         }
     }
 
-    public LoginPage(WebDriver driver)
-    {
+    public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -58,8 +39,7 @@ public class LoginPage
     By loginButtonLocator = By.id("login");
 
     // The login page allows the user to type their username into the username field
-    public LoginPage typeUsername(String username)
-    {
+    public LoginPage typeUsername(String username) {
         // This is the only place that "knows" how to enter a username
         driver.findElement(usernameLocator).sendKeys(username);
 
@@ -68,8 +48,7 @@ public class LoginPage
     }
 
     // The login page allows the user to type their password into the password field
-    public LoginPage typePassword(String password)
-    {
+    public LoginPage typePassword(String password) {
         // This is the only place that "knows" how to enter a password
         driver.findElement(passwordLocator).sendKeys(password);
 
@@ -78,8 +57,7 @@ public class LoginPage
     }
 
     // The login page allows the user to submit the login form
-    public InboxPage submitLogin()
-    {
+    public InboxPage submitLogin() {
         // This is the only place that submits the login form and expects the destination to be the home page.
         // A separate method should be created for the instance of clicking login whilst expecting a login failure.
         driver.findElement(loginButtonLocator).submit();
@@ -91,8 +69,7 @@ public class LoginPage
     }
 
     // The login page allows the user to submit the login form knowing that an invalid username and / or password were entered
-    public LoginPage submitLoginExpectingFailure()
-    {
+    public LoginPage submitLoginExpectingFailure() {
         // This is the only place that submits the login form and expects the destination to be the login page due to login failure.
         driver.findElement(loginButtonLocator).submit();
 
@@ -103,8 +80,7 @@ public class LoginPage
 
     // Conceptually, the login page offers the user the service of being able to "log into"
     // the application using a user name and password.
-    public InboxPage loginAs(String username, String password)
-    {
+    public InboxPage loginAs(String username, String password) {
         // The PageObject methods that enter username, password & submit login have already defined and should not be repeated here.
         typeUsername(username);
         typePassword(password);
