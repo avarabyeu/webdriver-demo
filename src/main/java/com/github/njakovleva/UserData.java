@@ -61,7 +61,7 @@ public class UserData {
 
         try {
 
-            input = new FileInputStream("config.properties");
+            input = Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties");
 
             // load a properties file
             userData.load(input);
