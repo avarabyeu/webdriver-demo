@@ -44,7 +44,7 @@ public class TestOneClass {
     public static String subject = sendFromGui.subject;
 
 
-    public void main() {
+    public static void main(String[] args) {
 
 
         //selection which procedure to run
@@ -68,7 +68,7 @@ public class TestOneClass {
 
 
     @Test(description = "Проверить что письмо появилось в папке отправленные.")
-    public void checkOutbox(SendFromGUIClass sendFromGUI) {
+    public static void checkOutbox(SendFromGUIClass sendFromGUI) {
         sendFromGUI.sendEmail();
         OutboxPage outboxPage = sendFromGUI.openSenderOutbox();
         Assert.assertTrue(outboxPage.hasMessage(subject));
@@ -78,3 +78,4 @@ public class TestOneClass {
     //public void checkPOP3() {
         //something
     //}
+}
