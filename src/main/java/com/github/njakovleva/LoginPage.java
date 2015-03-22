@@ -9,13 +9,13 @@ import java.util.concurrent.TimeUnit;
  * Created by jakovleva on 1/8/2015.
  */
 public class LoginPage {
-    private final WebDriver driver;
+    private WebDriver driver;
     private String url;
 
-    public LoginPage(WebDriver driver, String url) {
+    public LoginPage(WebDriver Driver, String Url) {
         long TimeOut = 30;
-        this.driver = driver;
-        this.url = url;
+        this.driver = Driver;
+        this.url = Url;
 
         driver.manage().timeouts().implicitlyWait(TimeOut, TimeUnit.SECONDS);
 
@@ -41,6 +41,7 @@ public class LoginPage {
     // The login page allows the user to type their username into the username field
     public LoginPage typeUsername(String username) {
         // This is the only place that "knows" how to enter a username
+        driver.findElement(usernameLocator).clear();
         driver.findElement(usernameLocator).sendKeys(String.valueOf(username));
 
         // Return the current page object as this action doesn't navigate to a page represented by another PageObject
@@ -50,6 +51,7 @@ public class LoginPage {
     // The login page allows the user to type their password into the password field
     public LoginPage typePassword(String password) {
         // This is the only place that "knows" how to enter a password
+        driver.findElement(passwordLocator).clear();
         driver.findElement(passwordLocator).sendKeys(String.valueOf(password));
 
         // Return the current page object as this action doesn't navigate to a page represented by another PageObject

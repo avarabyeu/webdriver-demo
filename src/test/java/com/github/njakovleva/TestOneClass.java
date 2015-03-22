@@ -49,6 +49,8 @@ public class TestOneClass {
     @Test(description = "Проверить что письмо появилось в папке отправленные.")
     public void checkOutbox() {
         sendFromGui.sendEmail(webDriver);
+        webDriver.close();
+        System.out.println("test");
         OutboxPage outboxPage = sendFromGui.openSenderOutbox(webDriver);
         Assert.assertTrue(outboxPage.hasMessage(userData.getSubject()));
     }

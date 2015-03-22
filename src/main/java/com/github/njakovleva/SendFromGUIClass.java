@@ -30,11 +30,9 @@ public class SendFromGUIClass {
     public OutboxPage openSenderOutbox(WebDriver driver) {
 
         LoginPage loginPage = new LoginPage(driver, userData.getSenderMailUrl());
-
+        //System.out.println("test");
         //sender actions
         InboxPage inboxPage = loginPage.loginAs(userData.getSenderLogin(), userData.getSenderPassword());
-        NewMailPage newMailPage = inboxPage.openComposePage();
-        inboxPage = newMailPage.sendMail(userData.getReceiver(), userData.getSubject(), userData.getContent());
 
         //open outbox
         OutboxPage outboxPage = inboxPage.openOutboxPage();
