@@ -10,45 +10,16 @@ import java.util.Properties;
 
 public class UserData {
 
-    private String senderMailUrl;
-    private String receiverMailUrl;
-    private String senderLogin;
-    private String senderPassword;
-    private String receiverLogin;
-    private String receiverPassword;
-    private String receiver;
+    private String urlGmail;
+    private String urlYandex;
+    private String loginGmail;
+    private String passwordGmail;
+    private String loginYandex;
+    private String passwordYandex;
+    private String mailYandex;
+    private String mailGmail;
     private String subject;
     private String content;
-
-//    public void loadUserData() {
-//
-//        Properties userData = new Properties();
-//        OutputStream output = null;
-//
-//        try {
-//
-//            output = new FileOutputStream("config.properties");
-//
-//            // set the properties value
-//            userData.setProperty("sender_mail", "www.gmail.com");
-//
-//            // save properties to project root folder
-//            userData.store(output, null);
-//
-//        } catch (IOException io) {
-//            io.printStackTrace();
-//        } finally {
-//            if (output != null) {
-//                try {
-//                    output.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//        }
-//
-//    }
 
 
     public UserData() {
@@ -66,13 +37,14 @@ public class UserData {
             // load a properties file
             userData.load(input);
 
-            senderMailUrl = userData.getProperty("sender_mail");
-            receiverMailUrl = userData.getProperty("receiver_mail");
-            senderLogin = userData.getProperty("sender_login");
-            senderPassword = userData.getProperty("sender_password");
-            receiverLogin = userData.getProperty("receiver_login");
-            receiverPassword = userData.getProperty("receiver_password");
-            receiver = userData.getProperty("receiver");
+            urlGmail = userData.getProperty("url_gmail");
+            urlYandex = userData.getProperty("url_yandex");
+            loginGmail = userData.getProperty("login_gmail");
+            passwordGmail = userData.getProperty("password_gmail");
+            loginYandex = userData.getProperty("login_yandex");
+            passwordYandex = userData.getProperty("password_yandex");
+            mailYandex = userData.getProperty("mail_yandex");
+            mailGmail = userData.getProperty("mail_gmail");
             subject = userData.getProperty("subject");
             content = userData.getProperty("content");
 
@@ -89,33 +61,28 @@ public class UserData {
         }
     }
 
-
-    public String getSenderMailUrl() {
-        return senderMailUrl;
+    public String getUrlGmail() {
+        return urlGmail;
     }
 
-    public String getReceiverMailUrl() {
-        return receiverMailUrl;
+    public String getUrlYandex() {
+        return urlYandex;
     }
 
-    public String getSenderLogin() {
-        return senderLogin;
+    public String getLoginGmail() {
+        return loginGmail;
     }
 
-    public String getSenderPassword() {
-        return senderPassword;
+    public String getPasswordGmail() {
+        return passwordGmail;
     }
 
-    public String getReceiverLogin() {
-        return receiverLogin;
+    public String getLoginYandex() {
+        return loginYandex;
     }
 
-    public String getReceiverPassword() {
-        return receiverPassword;
-    }
-
-    public String getReceiver() {
-        return receiver;
+    public String getPasswordYandex() {
+        return passwordYandex;
     }
 
     public String getSubject() {
@@ -124,5 +91,13 @@ public class UserData {
 
     public String getContent() {
         return content;
+    }
+
+    public String getMailYandex() {
+        return mailYandex;
+    }
+
+    public String getMailGmail() {
+        return mailGmail;
     }
 }

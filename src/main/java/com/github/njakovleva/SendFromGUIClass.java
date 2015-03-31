@@ -11,28 +11,28 @@ public class SendFromGUIClass {
     private static UserData userData = new UserData();
 
     public void sendEmail(WebDriver driver) {
-        LoginPage loginPage = new LoginPage(driver, userData.getSenderMailUrl());
+        LoginPage loginPage = new LoginPage(driver, userData.getUrlYandex());
 
         //sender actions
-        InboxPage inboxPage = loginPage.loginAs(userData.getSenderLogin(), userData.getSenderPassword());
+        InboxPage inboxPage = loginPage.loginAs(userData.getLoginYandex(), userData.getPasswordYandex());
         NewMailPage newMailPage = inboxPage.openComposePage();
-        inboxPage = newMailPage.sendMail(userData.getReceiver(), userData.getSubject(), userData.getContent());
+        inboxPage = newMailPage.sendMail(userData.getMailGmail(), userData.getSubject(), userData.getContent());
     }
 
     public InboxPage openReceiverEmail(WebDriver driver) {
-        LoginPage loginPage = new LoginPage(driver, userData.getReceiverMailUrl());
+        LoginPage loginPage = new LoginPage(driver, userData.getUrlGmail());
 
         //receiver actions
-        InboxPage inboxPage = loginPage.loginAs(userData.getReceiverLogin(), userData.getReceiverPassword());
+        InboxPage inboxPage = loginPage.loginAs(userData.getLoginGmail(), userData.getPasswordGmail());
         return inboxPage;
     }
 
     public OutboxPage openSenderOutbox(WebDriver driver) {
 
-        LoginPage loginPage = new LoginPage(driver, userData.getSenderMailUrl());
+        LoginPage loginPage = new LoginPage(driver, userData.getUrlYandex());
         //System.out.println("test");
         //sender actions
-        InboxPage inboxPage = loginPage.loginAs(userData.getSenderLogin(), userData.getSenderPassword());
+        InboxPage inboxPage = loginPage.loginAs(userData.getLoginYandex(), userData.getPasswordYandex());
 
         //open outbox
         OutboxPage outboxPage = inboxPage.openOutboxPage();
