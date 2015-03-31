@@ -13,21 +13,22 @@ public class NewMailPage {
         this.driver = driver;
 
         // Check that we're on the right page.
-        if (!"Compose".equals(driver.getTitle())) {
-            // Alternatively, we could navigate to the login page, perhaps logging out first
-            throw new IllegalStateException("This is not the Compose page");
-        }
+        //if (!"Yandex.Mail".equals(driver.getTitle())) {
+        // Alternatively, we could navigate to the login page, perhaps logging out first
+        //throw new IllegalStateException("This is not the Compose page");
+        //}
     }
 
-    By recipientLocator = By.id("recipient");
-    By subjectLocator = By.id("subject");
-    By contentLocator = By.id("content");
-    By sendButtonLocator = By.id("send");
+    By recipientLocator = By.className("to");
+    By subjectLocator = By.className("b-input__text js-kbd-subj");
+    By contentLocator = By.name("send");
+    By sendButtonLocator = By.id("nb-16");
 
     public NewMailPage typeRecipient(String recipient) {
         // This is the only place that "knows" how to enter a recipient
-        driver.findElement(recipientLocator).sendKeys(recipient);
 
+        driver.findElement(recipientLocator).sendKeys(recipient);
+        System.out.println("test");
         // Return the current page object as this action doesn't navigate to a page represented by another PageObject
         return this;
     }
@@ -70,3 +71,4 @@ public class NewMailPage {
         return submitMail();
     }
 }
+

@@ -22,7 +22,7 @@ public class LoginPage {
         driver.navigate().to(url);
 
         // Check that we're on the right page.
-        if (!"Gmail".equals(driver.getTitle())) {
+        if (!"Yandex.Mail — a free email service".equals(driver.getTitle())) {
             // Alternatively, we could navigate to the login page, perhaps logging out first
             throw new IllegalStateException("This is not the login page");
         }
@@ -34,9 +34,9 @@ public class LoginPage {
 
     // The login page contains several HTML elements that will be represented as WebElements.
     // The locators for these elements should only be defined once.
-    By usernameLocator = By.id("Email");
-    By passwordLocator = By.id("Passwd");
-    By loginButtonLocator = By.id("signIn");
+    By usernameLocator = By.id("b-mail-domik-username11");
+    By passwordLocator = By.id("b-mail-domik-password11");
+    By loginButtonLocator = By.className("b-mail-button__button");
 
     // The login page allows the user to type their username into the username field
     public LoginPage typeUsername(String username) {
@@ -89,3 +89,4 @@ public class LoginPage {
         return submitLogin();
     }
 }
+

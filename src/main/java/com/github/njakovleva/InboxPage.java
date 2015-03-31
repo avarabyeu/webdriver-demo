@@ -22,12 +22,13 @@ public class InboxPage {
         //}
     }
 
-    By composeButtonLocator = By.id(":as");
+    By composeButtonLocator = By.linkText("Compose");
     By signOutButtonLocator = By.id("signout");
     By outboxLinkLocator = By.id("outbox");
 
     public NewMailPage openComposePage() {
-        driver.findElement(composeButtonLocator).submit();
+        driver.findElement(composeButtonLocator).click();
+        System.out.println("test");
         return new NewMailPage(driver);
     }
 
