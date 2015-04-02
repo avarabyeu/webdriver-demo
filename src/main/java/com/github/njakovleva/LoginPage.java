@@ -2,7 +2,6 @@ package com.github.njakovleva;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -12,17 +11,77 @@ public class LoginPage {
     private WebDriver driver;
     private String url;
 
+    //HTML elements for yandex.com
+    //private By usernameLocator = By.id("b-mail-domik-username11");
+    //private By usernameLocator = By.name("");
+    //private By usernameLocator = By.className("");
+    //private By usernameLocator = By.linkName("");
+    //private By passwordLocator = By.id("b-mail-domik-password11");
+    //private By passwordLocator = By.name("");
+    //private By passwordLocator = By.className("");
+    //private By passwordLocator = By.linkName("");
+    //private By loginButtonLocator = By.id("");
+    //private By loginButtonLocator = By.name("");
+    //private By loginButtonLocator = By.className("b-mail-button__button");
+    //private By loginButtonLocator = By.linkName("");
+
+    //HTML elements for inbox.lv
+    private By usernameLocator = By.id("login");
+    //private By usernameLocator = By.name("");
+    //private By usernameLocator = By.className("");
+    //private By usernameLocator = By.linkName("");
+    //private By passwordLocator = By.id("");
+    //private By passwordLocator = By.name("");
+    private By passwordLocator = By.className("password");
+    //private By passwordLocator = By.linkName("");
+    //private By loginButtonLocator = By.id("");
+    //private By loginButtonLocator = By.name("");
+    private By loginButtonLocator = By.className("btnLogin");
+    //private By loginButtonLocator = By.linkName("");
+
+    //HTML elements for gmail.com
+    //private By usernameLocator = By.id("");
+    //private By usernameLocator = By.name("");
+    //private By usernameLocator = By.className("");
+    //private By usernameLocator = By.linkName("");
+    //private By passwordLocator = By.id("");
+    //private By passwordLocator = By.name("");
+    //private By passwordLocator = By.className("");
+    //private By passwordLocator = By.linkName("");
+    //private By loginButtonLocator = By.id("");
+    //private By loginButtonLocator = By.name("");
+    //private By loginButtonLocator = By.className("");
+    //private By loginButtonLocator = By.linkName("");
+
+
+    //HTML elements for mail.com
+    //private By usernameLocator = By.id("");
+    //private By usernameLocator = By.name("");
+    //private By usernameLocator = By.className("");
+    //private By usernameLocator = By.linkName("");
+    //private By passwordLocator = By.id("");
+    //private By passwordLocator = By.name("");
+    //private By passwordLocator = By.className("");
+    //private By passwordLocator = By.linkName("");
+    //private By loginButtonLocator = By.id("");
+    //private By loginButtonLocator = By.name("");
+    //private By loginButtonLocator = By.className("");
+    //private By loginButtonLocator = By.linkName("");
+
     public LoginPage(WebDriver Driver, String Url) {
         long TimeOut = 30;
         this.driver = Driver;
         this.url = Url;
 
         driver.manage().timeouts().implicitlyWait(TimeOut, TimeUnit.SECONDS);
-
         driver.navigate().to(url);
 
         // Check that we're on the right page.
-        if (!"Yandex.Mail — a free email service".equals(driver.getTitle())) {
+        //if (!"Yandex.Mail — a free email service".equals(driver.getTitle()))
+        //if (!"Inbox.lv".equals(driver.getTitle()))
+        //if (!"Вход – Google Аккаунты".equals(driver.getTitle()))
+        if (!"Free Email Addresses: Web based and secure Email - mail.com".equals(driver.getTitle()))
+        {
             // Alternatively, we could navigate to the login page, perhaps logging out first
             throw new IllegalStateException("This is not the login page");
         }
@@ -32,58 +91,40 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    // The login page contains several HTML elements that will be represented as WebElements.
-    // The locators for these elements should only be defined once.
-    By usernameLocator = By.id("b-mail-domik-username11");
-    By passwordLocator = By.id("b-mail-domik-password11");
-    By loginButtonLocator = By.className("b-mail-button__button");
-
     // The login page allows the user to type their username into the username field
     public LoginPage typeUsername(String username) {
-        // This is the only place that "knows" how to enter a username
         driver.findElement(usernameLocator).clear();
+        System.out.println("test");
         driver.findElement(usernameLocator).sendKeys(String.valueOf(username));
-
-        // Return the current page object as this action doesn't navigate to a page represented by another PageObject
+        System.out.println("test");
         return this;
     }
 
     // The login page allows the user to type their password into the password field
     public LoginPage typePassword(String password) {
-        // This is the only place that "knows" how to enter a password
-        driver.findElement(passwordLocator).clear();
+        System.out.println("test");
+        //driver.findElement(passwordLocator).clear();
+        System.out.println("test");
+        //driver.findElement(passwordLocator).click();
         driver.findElement(passwordLocator).sendKeys(String.valueOf(password));
-
-        // Return the current page object as this action doesn't navigate to a page represented by another PageObject
         return this;
     }
 
     // The login page allows the user to submit the login form
     public InboxPage submitLogin() {
-        // This is the only place that submits the login form and expects the destination to be the home page.
-        // A separate method should be created for the instance of clicking login whilst expecting a login failure.
         driver.findElement(loginButtonLocator).submit();
-
-        // Return a new page object representing the destination. Should the login page ever
-        // go somewhere else (for example, a legal disclaimer) then changing the method signature
-        // for this method will mean that all tests that rely on this behaviour won't compile.
         return new InboxPage(driver);
     }
 
     // The login page allows the user to submit the login form knowing that an invalid username and / or password were entered
     public LoginPage submitLoginExpectingFailure() {
-        // This is the only place that submits the login form and expects the destination to be the login page due to login failure.
         driver.findElement(loginButtonLocator).submit();
-
-        // Return a new page object representing the destination. Should the user ever be navigated to the home page after submiting a login with credentials
-        // expected to fail login, the script will fail when it attempts to instantiate the LoginPage PageObject.
         return new LoginPage(driver, url);
     }
 
-    // Conceptually, the login page offers the user the service of being able to "log into"
+    // The login page offers the user the service of being able to "log into"
     // the application using a user name and password.
     public InboxPage loginAs(String username, String password) {
-        // The PageObject methods that enter username, password & submit login have already defined and should not be repeated here.
         typeUsername(username);
         typePassword(password);
         return submitLogin();
