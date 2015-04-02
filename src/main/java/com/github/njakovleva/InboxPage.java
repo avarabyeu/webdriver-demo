@@ -14,21 +14,30 @@ public class InboxPage {
 
     public InboxPage(WebDriver driver) {
         this.driver = driver;
-
-        // Check that we're on the right page.
-        //if (!"Gmail".equals(driver.getTitle())) {
-            // Alternatively, we could navigate to the login page, perhaps logging out first
-           // throw new IllegalStateException("This is not the inbox page");
-        //}
     }
 
-    By composeButtonLocator = By.linkText("Compose");
+    //HTML elements for yandex.com
+    //By composeButtonLocator = By.linkText("Compose");
+    //By signOutButtonLocator = By.id("signout");
+    //By outboxLinkLocator = By.id("outbox");
+
+    //HTML elements for inbox.lv
+    By composeButtonLocator = By.id("mail-menu_li_compose");
     By signOutButtonLocator = By.id("signout");
     By outboxLinkLocator = By.id("outbox");
 
+    //HTML elements for gmail.com
+    //By composeButtonLocator = By.linkText("");
+    //By signOutButtonLocator = By.id("");
+    //By outboxLinkLocator = By.id("");
+
+    //HTML elements for mail.com
+    //By composeButtonLocator = By.linkText("");
+    //By signOutButtonLocator = By.id("");
+    //By outboxLinkLocator = By.id("");
+
     public NewMailPage openComposePage() {
         driver.findElement(composeButtonLocator).click();
-        System.out.println("test");
         return new NewMailPage(driver);
     }
 
