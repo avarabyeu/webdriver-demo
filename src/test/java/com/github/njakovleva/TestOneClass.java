@@ -2,13 +2,13 @@ package com.github.njakovleva;
 
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import java.io.IOException;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
 
 /**
  * Created by jakovleva on 11/6/2014.
@@ -50,7 +50,6 @@ public class TestOneClass {
     public void checkOutbox() {
         sendFromGui.sendEmail(webDriver);
         webDriver.close();
-        System.out.println("test");
         OutboxPage outboxPage = sendFromGui.openSenderOutbox(webDriver);
         Assert.assertTrue(outboxPage.hasMessage(userData.getSubject()));
     }

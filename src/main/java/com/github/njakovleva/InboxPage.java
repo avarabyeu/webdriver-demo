@@ -18,23 +18,23 @@ public class InboxPage {
 
     //HTML elements for yandex.com
     //By composeButtonLocator = By.linkText("Compose");
+    //By signOutButtonLocator = By.id("signout");//?
+    //By outboxLinkLocator = By.id("outbox");//?
+
+    //HTML elements for inbox.lv
+    //By composeButtonLocator = By.id("mail-menu_li_compose");
     //By signOutButtonLocator = By.id("signout");
     //By outboxLinkLocator = By.id("outbox");
 
-    //HTML elements for inbox.lv
-    By composeButtonLocator = By.id("mail-menu_li_compose");
-    By signOutButtonLocator = By.id("signout");
-    By outboxLinkLocator = By.id("outbox");
-
     //HTML elements for gmail.com
-    //By composeButtonLocator = By.linkText("");
+    //By composeButtonLocator = By.linkText("Compose");
     //By signOutButtonLocator = By.id("");
     //By outboxLinkLocator = By.id("");
 
     //HTML elements for mail.com
-    //By composeButtonLocator = By.linkText("");
-    //By signOutButtonLocator = By.id("");
-    //By outboxLinkLocator = By.id("");
+    By composeButtonLocator = By.linkText("Compose E-mail");
+    By signOutButtonLocator = By.id("");
+    By outboxLinkLocator = By.id("");
 
     public NewMailPage openComposePage() {
         driver.findElement(composeButtonLocator).click();

@@ -26,45 +26,45 @@ public class LoginPage {
     //private By loginButtonLocator = By.linkName("");
 
     //HTML elements for inbox.lv
-    private By usernameLocator = By.id("login");
-    //private By usernameLocator = By.name("");
+    //private By usernameLocator = By.id("tbimapuser");
+    //private By usernameLocator = By.name("imapuser");
     //private By usernameLocator = By.className("");
     //private By usernameLocator = By.linkName("");
-    //private By passwordLocator = By.id("");
-    //private By passwordLocator = By.name("");
-    private By passwordLocator = By.className("password");
-    //private By passwordLocator = By.linkName("");
-    //private By loginButtonLocator = By.id("");
-    //private By loginButtonLocator = By.name("");
-    private By loginButtonLocator = By.className("btnLogin");
-    //private By loginButtonLocator = By.linkName("");
-
-    //HTML elements for gmail.com
-    //private By usernameLocator = By.id("");
-    //private By usernameLocator = By.name("");
-    //private By usernameLocator = By.className("");
-    //private By usernameLocator = By.linkName("");
-    //private By passwordLocator = By.id("");
-    //private By passwordLocator = By.name("");
+    //private By passwordLocator = By.id("tbpass");
+    //private By passwordLocator = By.name("pass");
     //private By passwordLocator = By.className("");
     //private By passwordLocator = By.linkName("");
     //private By loginButtonLocator = By.id("");
+    //private By loginButtonLocator = By.name("");
+    //private By loginButtonLocator = By.className("btn btn_primary");
+    //private By loginButtonLocator = By.linkName("");
+
+    //HTML elements for gmail.com
+    //private By usernameLocator = By.id("Email");
+    //private By usernameLocator = By.name("");
+    //private By usernameLocator = By.className("");
+    //private By usernameLocator = By.linkName("");
+    //private By passwordLocator = By.id("Passwd");
+    //private By passwordLocator = By.name("");
+    //private By passwordLocator = By.className("");
+    //private By passwordLocator = By.linkName("");
+    //private By loginButtonLocator = By.id("signIn");
     //private By loginButtonLocator = By.name("");
     //private By loginButtonLocator = By.className("");
     //private By loginButtonLocator = By.linkName("");
 
 
     //HTML elements for mail.com
-    //private By usernameLocator = By.id("");
-    //private By usernameLocator = By.name("");
+    private By usernameLocator = By.id("login");
+    //private By usernameLocator = By.name("username");
     //private By usernameLocator = By.className("");
     //private By usernameLocator = By.linkName("");
-    //private By passwordLocator = By.id("");
+    private By passwordLocator = By.id("password");
     //private By passwordLocator = By.name("");
     //private By passwordLocator = By.className("");
     //private By passwordLocator = By.linkName("");
-    //private By loginButtonLocator = By.id("");
-    //private By loginButtonLocator = By.name("");
+    private By loginButtonLocator = By.id("btnLogin");
+    //private By loginButtonLocator = By.name("btnLogin");
     //private By loginButtonLocator = By.className("");
     //private By loginButtonLocator = By.linkName("");
 
@@ -82,8 +82,8 @@ public class LoginPage {
         //if (!"Вход – Google Аккаунты".equals(driver.getTitle()))
         if (!"Free Email Addresses: Web based and secure Email - mail.com".equals(driver.getTitle()))
         {
-            // Alternatively, we could navigate to the login page, perhaps logging out first
-            throw new IllegalStateException("This is not the login page");
+           //Alternatively, we could navigate to the login page, perhaps logging out first
+           throw new IllegalStateException("This is not the login page");
         }
     }
 
@@ -93,20 +93,21 @@ public class LoginPage {
 
     // The login page allows the user to type their username into the username field
     public LoginPage typeUsername(String username) {
+        //System.out.println(username);
         driver.findElement(usernameLocator).clear();
-        System.out.println("test");
         driver.findElement(usernameLocator).sendKeys(String.valueOf(username));
-        System.out.println("test");
         return this;
     }
 
     // The login page allows the user to type their password into the password field
     public LoginPage typePassword(String password) {
-        System.out.println("test");
-        //driver.findElement(passwordLocator).clear();
-        System.out.println("test");
-        //driver.findElement(passwordLocator).click();
+        //System.out.println(String.valueOf(password));
+        if (!(driver.findElement(passwordLocator)).isSelected()){
+            System.out.println("password textbox is not selected");
+        }
+        driver.findElement(passwordLocator).clear();
         driver.findElement(passwordLocator).sendKeys(String.valueOf(password));
+
         return this;
     }
 
