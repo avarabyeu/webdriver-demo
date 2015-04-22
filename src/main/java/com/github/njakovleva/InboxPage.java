@@ -37,6 +37,8 @@ public class InboxPage {
     By outboxLinkLocator = By.id("");
 
     public NewMailPage openComposePage() {
+        /* Make sure you selected right frame before clicking on 'compose email' */
+        driver.switchTo().frame("home");
         driver.findElement(composeButtonLocator).click();
         return new NewMailPage(driver);
     }
