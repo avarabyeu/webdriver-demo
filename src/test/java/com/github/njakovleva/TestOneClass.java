@@ -29,7 +29,7 @@ public class TestOneClass {
 
     @BeforeClass
     public void openWebDriver() throws IOException {
-        System.setProperty("webdriver.chrome.driver", "D:\\Installations\\Chrome Driver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Installations\\Chrome Driver\\chromedriver.exe");
         webDriver = new ChromeDriver();
     }
 
